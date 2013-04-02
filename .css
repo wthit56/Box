@@ -1,0 +1,9 @@
+body {font-family:sans-serif; line-height:140%;}
+
+summary {outline:none;}
+summary::-webkit-details-marker {display:none;}
+summary span {border-bottom:1px dotted black; cursor:pointer; font-family:serif;}
+
+form {padding-left:100px;}
+form label {float:left; width:100px; text-align:right; margin-left:-100px;}
+form em {display:inline-block;}

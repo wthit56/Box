@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Box</title>
+		<link href=".css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+		<h1>Box</h1>
+		<p>
+			To box a value means to turn that into an object. 
+			This object can then be used to retrieve the value, which is called <em>un</em>boxing.
+		</p>
+		
+		<fieldset>
+			<legend>Test</legend>
+			<p>
+				<label for="useNew">Use "new":&nbsp;</label>
+				<input id="useNew" type="checkbox" />
+				<em>This will force boxing using a Box object, rather than using a boxed object for the corresponding value type.</em>
+			</p>
+			<form id="free">
+				<label for="freeValue">Free Value:&nbsp;</label>
+				<textarea id="freeValue">Math.PI</textarea>
+				<input type="submit" />
+				<em>This will be evaluated as regular JavaScript code, and will be used to create a boxed object.</em>
+			</form>
+			<form id="number">
+				<label for="numberValue">Number:&nbsp;</label>
+				<input id="numberValue" type="number" value="1" step="any" />
+				<input type="submit" />
+			</form>
+			<form id="string">
+				<label for="stringValue">String:&nbsp;</label>
+				&quot;<input id="stringValue" type="text" value="string" />&quot;
+				<input type="submit" />
+			</form>
+			<form id="boolean">
+				<label for="booleanValue">Boolean:&nbsp;</label>
+				<select id="booleanValue">
+					<option>true</option>
+					<option>false</option>
+				</select>
+				<input type="submit" />
+			</form>
+			<form id="object">
+				<label for="objectValue">Object:&nbsp;</label>
+				<input id="objectValue" type="text" value="{ property: &quot;value&quot; }" disabled />
+				<input type="submit" />
+			</form>
+			<form id="other">
+				<label for="otherValue">Other:&nbsp;</label>
+				<select id="otherValue">
+					<option>null</option>
+					<option>undefined</option>
+				</select>
+				<input type="submit" />
+			</form>
+		</fieldset>
+
+		<details>
+			<summary>Open your browser's console to see test results. <span title="Click to open or close further instructions">How?</span></summary>
+			<ol>
+				<li>
+					<details>
+						<summary>Open your browser's developer tools. <span title="Click to open or close further instructions">How?</span></summary>
+						<ul>
+							<li>Press F12</li>
+							<li>Or right-click &gt; Inspect</li>
+						</ul>
+					</details>
+				</li>
+				<li>
+					<details>
+						<summary>Change to the Console view. <span title="Click to open or close further instructions">How?</span></summary>
+						<ul>
+							<li>
+								Find the a tab or button saying "Console" in your now open developer tools,
+								and click on it.
+							</li>
+						</ul>
+					</details>
+				</li>
+			</ol>
+		</details>
+
+		<script src=".js" type="text/javascript"></script>
+		<script type="text/javascript">
+  	var useNew = document.getElementById("useNew");
+  	function test(value) {
+  		eval("var boxed = " + (useNew.checked ? "new" : "") + " Box(" + value + ");");
+  		console.log("boxed value: ", boxed);
+  		console.log("valueOf: ", boxed.valueOf());
+  	}
+
+  	window.onsubmit = function (e) {
+  		e.preventDefault();
+
+  		var form = e.target;
+  		console.group(form.id);
+  		{
+  			test(
+  	            form.id === "string"
+  	                ? "\"" + form[0].value + "\""
+  	                : form[0].value
+  	        );
+  		}
+  		console.groupEnd();
+  	};
+		</script>
+    </body>
+</html>
